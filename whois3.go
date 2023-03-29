@@ -49,6 +49,10 @@ func main() {
 	fmt.Println(string(jsonBytes))
 }
 
+//Создаем объект структуры для хранения данных
+Из строки получаем массив данных
+Проходимся по массиву, вытаскивая нужные данные
+
 func parseWhoisOutput(output string) WhoisInfo {
 	result := WhoisInfo{}
 
