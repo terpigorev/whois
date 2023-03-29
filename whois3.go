@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Создаю структуру для хранения полученных от whois данных
+// Создаём структуру для хранения полученных от whois данных
 
 type WhoisInfo struct {
 	DomainName             string
@@ -23,28 +23,29 @@ type WhoisInfo struct {
 }
 
 func main() {
-	// Получаю информацию о домене
+	// Получаем информацию о домене
 	domain := "yandex.ru"
 	var whoisInfo WhoisInfo
 
 	cmd := exec.Command("./whois.exe", domain)
-	// Проверяю, получил ли мы информацию о домене
+	// Проверяем, получили ли мы информацию о домене
 	output, err := cmd.Output()
 	if err != nil {
 		fmt.Printf("Error: %s\n", err.Error())
 		return
 	}
 
+	// Парсим полученную строку в структуру
 	whoisInfo = parseWhoisOutput(string(output))
-	
-	// Массив байт возвращаю методом json.Marshal() В строку проеобразовал с помощью string() передав в него массив байт.
 
+	// Преобразуем (сериализуем) структуру в json
 	jsonBytes, err := json.MarshalIndent(whoisInfo, "", "  ")
 	if err != nil {
 		fmt.Printf("Error: %s\n", err.Error())
 		return
 	}
 
+	// Выводим результат в консоль
 	fmt.Println(string(jsonBytes))
 }
 
